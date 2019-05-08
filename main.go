@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"fmt"
 	"log"
 	"net/http"
@@ -95,6 +96,10 @@ func callDefault(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, "Can't find URL")
 	}
 	client := &http.Client{
+		Transport: &http.Transport{
+			DisableKeepAlives: true,
+			TLSClientConfig:   &tls.Config{InsecureSkipVerify: true},
+		},
 		Timeout: time.Second,
 	}
 	req, err := http.NewRequest("GET", url, nil)
