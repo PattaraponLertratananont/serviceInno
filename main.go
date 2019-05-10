@@ -79,7 +79,7 @@ func callDefault(c echo.Context) error {
 		})
 	}
 	defer respones.Body.Close()
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 50; i++ {
 		go cal()
 	}
 	cal()
