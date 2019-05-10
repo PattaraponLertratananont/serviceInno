@@ -79,9 +79,7 @@ func callDefault(c echo.Context) error {
 		})
 	}
 	defer respones.Body.Close()
-	for i := 0; i < 20; i++ {
-		go cal()
-	}
+	go cal()
 	cal()
 
 	return c.JSON(respones.StatusCode, nil)
