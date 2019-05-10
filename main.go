@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 	"strings"
@@ -78,8 +79,20 @@ func callDefault(c echo.Context) error {
 		})
 	}
 	defer respones.Body.Close()
+	for i := 0; i < 100; i++ {
+		go cal()
+	}
+	cal()
 
 	return c.JSON(respones.StatusCode, nil)
+}
+
+func cal() {
+	x := 0.0
+	rand.Seed(int64(time.Now().Nanosecond()))
+	for i := 0.0; i < 100000.0; i++ {
+		x = (((x + 0.24999484587428) * i) / (i * 12.4123456)) * rand.Float64()
+	}
 }
 
 func callBuild(c echo.Context) error {
