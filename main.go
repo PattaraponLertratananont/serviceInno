@@ -89,7 +89,7 @@ func cal() {
 	x := 0.0
 	rand.Seed(int64(time.Now().Nanosecond()))
 	for i := 0.0; i < 100000.0; i++ {
-		x = (((x + 0.24999484587428) * i) / (i * 12.4123456)) * rand.Float64()
+		x = (((x + 0.24999484587428) * i) / (i * rand.Float64()))
 	}
 }
 
